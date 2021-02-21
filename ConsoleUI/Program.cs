@@ -1,4 +1,6 @@
-﻿using DataAccess.Abstract;
+﻿using Business.Concrete;
+using DataAccess.Abstract;
+using DataAccess.Concrete;
 using Entities.Concrete;
 using System;
 using System.Linq;
@@ -11,7 +13,14 @@ namespace ConsoleUI
         {
             //GetAll();
 
-            GetProductsByCategoryId(2);
+            //GetProductsByCategoryId(2);
+
+            ProductManager productManager = new ProductManager(new EfProductDal());
+
+            foreach (var product in productManager.GetAll())
+            {
+                Console.WriteLine($"{product.ProductID} {product.ProductName} {product.QuantityPerUnit}");
+            }
         }
 
         private static void GetAll()
